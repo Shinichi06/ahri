@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Bubby</title>
+    <style>
+      body {
+        background-color: #111;
+        overflow: hidden;
+      }
+
+      .btn-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        position: relative;
+      }
+
+      .btn {
+        margin: 10px 0;
+        height: 3.5rem;
+        width: 13.2rem;
+        border-radius: 5px;
+        border: 5px solid #fff;
+        cursor: pointer;
+        filter: drop-shadow(0px 0px 10px #fff);
+        animation: flickering 2s linear infinite both;
+        text-transform: uppercase;
+        background-color: #535252;
+        color: #eaeaea;
+        font-weight: 700;
+        position: relative;
+      }
+
+      .endless-text {
+        position: absolute;
+        color: #fff;
+        display: none;
+        z-index: 1;
+        font-family: 'Arial', sans-serif;
+        font-size: 16px;
+        padding: 10px;
+        background-color: #333;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="audio" src="audio/1st.mp3" autoplay loop></audio>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-6 btn-container">
+          <button class="bati-na-btn btn">
+            <span class="text">BATI NA</span>
+          </button>
+          <button class="btn" onclick="showEndlessText(event)">
+            <span class="text">NOPE :((</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      const sentences = [
+        "forgive me for misunderstanding you..",
+        "i love you so much, bubby...",
+        "don't want cool off po...",
+        "please...",
+        "bati na tayo, please..",
+        "sorry for the mean stuff i told you..",
+        "did not mean to hurt you...",
+        "sorry for keeping you expect...",
+        "sorry for not making effort...",
+        "i do make efforts naman po...",
+        "sorry for not doing enough...",
+        "sorry for disappointing you...",
+        "i'm sorry if i make you feel i don't care enough...",
+        "I'm sorry, I was wrong...",
+        "I regret my actions...",
+        "I'll change for us...",
+        "I'm truly sorry...",
+        // Add more sentences as needed
+      ];
+
+      function showEndlessText(event) {
+        const randomSentence = sentences[Math.floor(Math.random() * sentences.length)];
+        const textElement = document.createElement('div');
+        textElement.classList.add('endless-text');
+        textElement.innerText = randomSentence;
+
+        const btn = event.currentTarget;
+        const btnPosition = btn.getBoundingClientRect();
+
+        const locations = [
+          { x: 50, y: 50 }, // Top-left
+          { x: window.innerWidth - 200, y: 50 }, // Top-right
+          { x: 50, y: window.innerHeight - 200 }, // Bottom-left
+          { x: window.innerWidth - 200, y: window.innerHeight - 200 }, // Bottom-right
+          { x: window.innerWidth / 2 - 100, y: 50 }, // Top-center
+          { x: window.innerWidth / 2 - 100, y: window.innerHeight - 200 }, // Bottom-center
+          { x: 50, y: window.innerHeight / 2 - 100 }, // Left-center
+          { x: window.innerWidth - 200, y: window.innerHeight / 2 - 100 }, // Right-center
+          { x: window.innerWidth / 3, y: window.innerHeight / 3 }, // Farther from Top-left
+          { x: window.innerWidth - (window.innerWidth / 3), y: window.innerHeight / 3 }, // Farther from Top-right
+          { x: window.innerWidth / 3, y: window.innerHeight - (window.innerHeight / 3) }, // Farther from Bottom-left
+          { x: window.innerWidth - (window.innerWidth / 3), y: window.innerHeight - (window.innerHeight / 3) } // Farther from Bottom-right
+        ];
+
+        const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+
+        textElement.style.left = randomLocation.x + 'px';
+        textElement.style.top = randomLocation.y + 'px';
+
+        document.body.appendChild(textElement);
+
+        setTimeout(() => {
+          textElement.style.display = 'block';
+          setTimeout(() => {
+            document.body.removeChild(textElement);
+          }, 1000); // Adjust the time the text remains visible (in milliseconds)
+        }, 50); // Delay before showing the text
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const batiNaButton = document.querySelector('.bati-na-btn');
+        batiNaButton.addEventListener('click', () => {
+          window.location.href = 'flowers.html';
+        });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0Ec
